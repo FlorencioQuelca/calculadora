@@ -12,12 +12,15 @@ class Sumar extends Component{
        sum:0,
        resta:0,
        producto:0,
+       divi:1,
      };
      this.number1 =this.number1.bind(this);
      this.number2 =this.number2.bind(this);
      this.suma =this.suma.bind(this);
      this.restar =this.restar.bind(this);
      this.multiplicar =this.multiplicar.bind(this);
+     this.dividir =this.dividir.bind(this);
+     
      
      }
 
@@ -35,20 +38,25 @@ class Sumar extends Component{
   }
   restar(){
     const{resta,a,b} =this.state;
-    this.setState({resta:a-b})
+    this.setState({resta:a-b});
   }
 
   multiplicar(){
     const{producto,a,b} =this.state;
-    this.setState({producto:a*b})
+    this.setState({producto:a*b});
+  }
+  dividir(){
+    const{divi,a,b} =this.state;
+    this.setState({divi:a/b});
   }
   //
 render(){
 
-   const {a,b,sum,resta,producto} =this.state;
+   const {a,b,sum,resta,producto,divi} =this.state;
     return(
         
      <View style ={styles.container}>
+       <Text styles={styles.box}> CALCULADORA BASICA POR. FLORENCIO QUELCA </Text>
        <Text> numero 1</Text>
        <TextInput style = {styles.box}
          onChangeText={this.number1}
@@ -76,28 +84,34 @@ render(){
        />
 
         <View style= {styles.subcontainer}> 
-
+        
           <TouchableOpacity style ={styles.btn}
-            onPress= {this.suma}
-    
-          >
+            onPress= {this.suma}>
             <Text styles={styles.box}> sumar </Text>
           </TouchableOpacity>
-          <Text></Text>
+          <Text style={styles.res}>suma : {sum}</Text>
            
           <TouchableOpacity style ={styles.btn}
           onPress= {this.restar}>
             <Text styles={styles.box}> restar </Text>
           </TouchableOpacity>
-          < Text></Text>
+          <Text style={styles.res}>diferencia: {resta}</Text>
           <TouchableOpacity style ={styles.btn}
           onPress= {this.multiplicar}>
             <Text styles={styles.box}> multiplicar </Text>
           </TouchableOpacity>
-           <Text> suma/resta/Producto:</Text>
-          <Text style={styles.res}>{sum}</Text>
-          <Text style={styles.res}>{resta}</Text>
-          <Text style={styles.res}>{producto}</Text>
+          <Text style={styles.res}>producto: {producto}</Text>
+           
+          <TouchableOpacity style ={styles.btn}
+                        onPress= {() => {if(b!=0){this.dividir()}else{alert('no se puede dividir denminador = 0')}} }
+              >
+            <Text styles={styles.box}> dividir </Text>
+          </TouchableOpacity>
+          
+          <Text style={styles.res}>division: {divi}</Text>
+          
+         
+
         </View>
         
       </View>
